@@ -1,0 +1,23 @@
+[project]
+name = "tnfd-graphrag-v1"
+version = "0.1.0"
+description = "TNFD 지속가능성 보고서 분석을 위한 Knowledge Graph RAG 시스템"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+    "pymupdf>=1.24.0",
+    "pymupdf4llm>=0.0.10",
+    "langchain>=0.3.0",
+    "langchain-google-genai>=2.0.0",
+    "google-genai>=1.0.0",
+    "neo4j>=5.0.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
