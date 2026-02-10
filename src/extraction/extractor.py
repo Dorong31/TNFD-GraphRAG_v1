@@ -106,6 +106,15 @@ class TripleExtractor:
             evidence.id
         )
         
+        # Evidence Linking: 모든 추출된 노드를 Evidence와 연결 (MENTIONS)
+        # 원칙 1. 근거 기반 추출 (Evidence Grounding) 구현
+        for node in nodes:
+            relationships.append(Relationship(
+                source_id=node.id,
+                relationship_type="MENTIONS",
+                target_id=evidence.id
+            ))
+        
         # Evidence 노드도 결과에 포함
         nodes.append(evidence)
         

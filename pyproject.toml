@@ -1,6 +1,6 @@
 [project]
 name = "tnfd-graphrag-v1"
-version = "0.1.0.1"
+version = "0.1.0.2"
 description = "TNFD 지속가능성 보고서 분석을 위한 Knowledge Graph RAG 시스템"
 requires-python = ">=3.11,<3.14"
 dependencies = [
