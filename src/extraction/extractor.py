@@ -79,6 +79,9 @@ class TripleExtractor:
         try:
             response = self.llm.invoke([HumanMessage(content=prompt)])
             result_text = response.content
+            # Google Gemini가 가끔 리스트 형태의 콘텐츠를 반환하는 경우 처리
+            if isinstance(result_text, list):
+                result_text = "".join([str(item) for item in result_text])
         except Exception as e:
             print(f"LLM 호출 오류: {e}")
             return ExtractionResult()
