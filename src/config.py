@@ -36,8 +36,8 @@ NEO4J_USERNAME = os.getenv("NEO4J_USERNAME", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "")
 
 # ============ 모델 설정 ============
-# LLM 모델명 (Gemini)
-LLM_MODEL = os.getenv("LLM_MODEL", "gemini-2.0-flash")
+# LLM 모델명 (Gemini 3 Flash Preview - 768차원 컨텍스트)
+LLM_MODEL = os.getenv("LLM_MODEL", "gemini-3-flash-preview")
 
 # 임베딩 모델명 (Google Gemini Embedding)
 # gemini-embedding-001은 768차원 출력 지원

@@ -6,7 +6,7 @@
 |----------|------|
 | **가상환경** | uv (Python 3.11) |
 | **임베딩** | `gemini-embedding-001` (768차원) |
-| **LLM** | `gemini-2.0-flash` |
+| **LLM** | `gemini-3-flash-preview` |
 | **그래프 DB** | Neo4j Docker Community |
 | **테스트 PDF** | 삼성바이오로직스 2025 지속가능성 보고서 |
 
