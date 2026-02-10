@@ -81,7 +81,18 @@ class TripleExtractor:
             result_text = response.content
             # Google Gemini가 가끔 리스트 형태의 콘텐츠를 반환하는 경우 처리
             if isinstance(result_text, list):
-                result_text = "".join([str(item) for item in result_text])
+                # 리스트 아이템이 포맷된 텍스트나 딕셔너리일 경우 처리
+                text_parts = []
+                for item in result_text:
+                    if isinstance(item, str):
+                        text_parts.append(item)
+                    elif isinstance(item, dict) and 'text' in item:
+                        text_parts.append(item['text'])
+                    elif hasattr(item, 'text'):
+                        text_parts.append(item.text)
+                    else:
+                        text_parts.append(str(item))
+                result_text = "".join(text_parts)
         except Exception as e:
             print(f"LLM 호출 오류: {e}")
             return ExtractionResult()
@@ -162,13 +173,19 @@ class TripleExtractor:
         
         코드 블록(```json ... ```)이나 일반 JSON을 모두 처리합니다.
         """
+        print(f"DEBUG: Raw response text repr: {repr(response_text)}")
+        
         # 코드 블록에서 JSON 추출
         json_match = re.search(r'```(?:json)?\s*([\s\S]*?)```', response_text)
+        print(f"DEBUG: JSON match found: {bool(json_match)}")
+        
         if json_match:
             json_str = json_match.group(1).strip()
+            print(f"DEBUG: Extracted JSON string repr: {repr(json_str)}")
         else:
             # 코드 블록 없이 JSON만 있는 경우
             json_str = response_text.strip()
+            print(f"DEBUG: No code block, using stripped text. repr: {repr(json_str)}")
         
         # JSON 파싱 시도
         try:
@@ -182,6 +199,7 @@ class TripleExtractor:
                 return json.loads(fixed)
             except json.JSONDecodeError:
                 print(f"JSON 파싱 실패: {e}")
+                print(f"DEBUG: json_str repr: {repr(json_str)}")
                 print(f"원본 텍스트: {json_str[:500]}...")
                 return None
     
