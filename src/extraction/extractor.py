@@ -173,19 +173,19 @@ class TripleExtractor:
         
         코드 블록(```json ... ```)이나 일반 JSON을 모두 처리합니다.
         """
-        print(f"DEBUG: Raw response text repr: {repr(response_text)}")
+
         
         # 코드 블록에서 JSON 추출
         json_match = re.search(r'```(?:json)?\s*([\s\S]*?)```', response_text)
-        print(f"DEBUG: JSON match found: {bool(json_match)}")
+
         
         if json_match:
             json_str = json_match.group(1).strip()
-            print(f"DEBUG: Extracted JSON string repr: {repr(json_str)}")
+
         else:
             # 코드 블록 없이 JSON만 있는 경우
             json_str = response_text.strip()
-            print(f"DEBUG: No code block, using stripped text. repr: {repr(json_str)}")
+
         
         # JSON 파싱 시도
         try:
@@ -199,7 +199,7 @@ class TripleExtractor:
                 return json.loads(fixed)
             except json.JSONDecodeError:
                 print(f"JSON 파싱 실패: {e}")
-                print(f"DEBUG: json_str repr: {repr(json_str)}")
+
                 print(f"원본 텍스트: {json_str[:500]}...")
                 return None
     
